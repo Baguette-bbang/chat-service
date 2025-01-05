@@ -1,15 +1,17 @@
 document.getElementById("signup-form").onsubmit = async (e) => {
   e.preventDefault();
   try {
-    const nickname = document.getElementById("username").value.trim(); // trim() 추가
+    const userId = document.getElementById("userId").value.trim();
+    const nickname = document.getElementById("nickname").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if (!nickname) {
-      alert("닉네임을 입력해주세요");
+    if (!userId || !nickname || !password) {
+      alert("모든 항목을 입력해주세요.");
       return;
     }
 
-    // 닉네임 중복 체크
-    const response = await fetch(`http://localhost:3000/user/check?nickname=${encodeURIComponent(nickname)}`);
+    // 아이디 중복 체크
+    const response = await fetch(`http://localhost:3000/user/check/userId?userId=${encodeURIComponent(userId)}`);
     const result = await response.json();
 
     if (!response.ok) {
@@ -23,13 +25,13 @@ document.getElementById("signup-form").onsubmit = async (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nickname }),
+      body: JSON.stringify({ userId, nickname, password }),
     });
 
     if (signupResponse.ok) {
       alert("회원가입 성공!");
       localStorage.setItem("chat-username", nickname);
-      window.location.href = "chat.html";
+      window.location.href = "index.html"; // 회원가입 후 로그인 페이지로 이동
     } else {
       const errorData = await signupResponse.json();
       alert(errorData.message || "회원가입 실패");
