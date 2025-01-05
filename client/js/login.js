@@ -23,7 +23,8 @@ document.getElementById("login-form").onsubmit = async (e) => {
     if (response.ok) {
       alert("로그인 성공!");
       localStorage.setItem("chat-username", result.nickname);
-      window.location.href = "chat.html";
+      localStorage.setItem("userUuid", result.userUuid);
+      window.location.href = "room-list.html";
     } else {
       alert(result.message || "로그인 실패");
     }
