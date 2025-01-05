@@ -45,7 +45,9 @@ export class UserService {
   }
 
   // 로그인
-  async login(dto: LoginUserDto): Promise<{ message: string; token?: string }> {
+  async login(
+    dto: LoginUserDto,
+  ): Promise<{ userUuid: string; nickname: string; token: string }> {
     const user = await this.userRepository.findOne({
       where: { userId: dto.userId },
     });
@@ -63,7 +65,12 @@ export class UserService {
       throw new UnauthorizedException('아이디 또는 비밀번호가 잘못되었습니다.');
     }
 
-    return { message: '로그인 성공', token: 'jwt-token-example' };
+    // userUuid와 nickname도 반환
+    return {
+      userUuid: user.userUuid,
+      nickname: user.nickname,
+      token: 'jwt-token-example', // 추후 실제 JWT로 대체
+    };
   }
 
   // 아이디 중복 체크

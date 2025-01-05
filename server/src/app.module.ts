@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
+import { ChatRoomModule } from './\bchat-room/chat-room.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { UserModule } from './user/user.module';
       logging: true,
     }),
     UserModule, // 추가
+    ChatRoomModule,
   ],
 
   controllers: [AppController],

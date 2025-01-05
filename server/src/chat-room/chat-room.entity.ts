@@ -8,4 +8,7 @@ export class ChatRoom extends BaseEntity {
 
   @Column({ name: 'creator_uuid' })
   creatorUuid: string;
+
+  @Column({ default: 0 })
+  participantCount: number;
 }
