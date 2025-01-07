@@ -35,4 +35,9 @@ export class ChatRoomController {
   ) {
     return await this.chatRoomService.getChatRooms(sortBy, order);
   }
+
+  @Get('/:id')
+  async getRoom(@Param('id') id: number) {
+    return this.chatRoomService.getRoomById(id);
+  }
 }

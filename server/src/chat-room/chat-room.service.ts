@@ -37,4 +37,12 @@ export class ChatRoomService {
       order: { [sortBy]: order },
     });
   }
+
+  async getRoomById(id: number): Promise<ChatRoom> {
+    const room = await this.chatRoomRepository.findOne({ where: { id } });
+    if (!room) {
+      throw new NotFoundException('채팅방을 찾을 수 없습니다.');
+    }
+    return room;
+  }
 }

@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { ChatRoomModule } from './\bchat-room/chat-room.module';
-
+import { ChatRoomModule } from './chat-room/chat-room.module';
+import { MessageModule } from './message/message.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +25,7 @@ import { ChatRoomModule } from './\bchat-room/chat-room.module';
     }),
     UserModule, // 추가
     ChatRoomModule,
+    MessageModule,
   ],
 
   controllers: [AppController],
